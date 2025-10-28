@@ -13,9 +13,10 @@ st.title("VP Registration (Construction)")
 # Important Note and Caution
 st.warning("""
 **State buffs plan**  
-10-Oct Monday : Construction                 
-11-Oct Tuesday : Research  
-13-Oct Thursday: Training  
+03-Nov Monday : Construction                 
+04-Nov Tuesday : Research  
+06-Nov Thursday: Training
+07-Nov Friday: Final Day  
   
 """)
 
@@ -46,7 +47,7 @@ with st.form("registration_form"):
     # Alliance Selection
     alliance = st.selectbox(
         "What is Your Alliance?*",
-        ["TCW", "EFE", "MRA", "FOX" ,"SHR", "MMD" ],
+        ["FBR", "LAT", "CON", "WLX" ,"NWN", "Bluntman is Sexy" ],
         index=0
     )
     
@@ -54,7 +55,7 @@ with st.form("registration_form"):
     # FC Level
     fc_level = st.selectbox(
         "What is Your Current FC level?*",
-        ["F28","F29","F30", "FC1", "FC2", "FC3", "FC4", "FC5"],
+        ["F28","F29","F30", "FC1", "FC2", "FC3", "FC4", "FC5", "FC6","FC7","FC8"],
         index=0
     )
     
