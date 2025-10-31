@@ -13,9 +13,9 @@ st.title("VP Registration (Construction)")
 # Important Note and Caution
 st.warning("""
 **State buffs plan**  
-10-Oct Monday : Construction                 
-11-Oct Tuesday : Research  
-13-Oct Thursday: Training  
+Day 1 : Construction                 
+Day 2 : Research  
+Day 4 : Training  
   
 """)
 
@@ -91,23 +91,32 @@ with st.form("registration_form"):
     )
     
     # Preferred timing for ministry buff
+    time_slots = [
+        "00:00 UTC to 02:00 UTC",
+        "02:00 UTC to 04:00 UTC",
+        "04:00 UTC to 06:00 UTC",
+        "06:00 UTC to 08:00 UTC",
+        "08:00 UTC to 10:00 UTC",
+        "10:00 UTC to 12:00 UTC",
+        "12:00 UTC to 14:00 UTC",
+        "14:00 UTC to 16:00 UTC",
+        "16:00 UTC to 18:00 UTC",
+        "18:00 UTC to 20:00 UTC",
+        "20:00 UTC to 22:00 UTC",
+        "22:00 UTC to 23:59 UTC"
+    ]
+    
     buff_timing = st.selectbox(
         "What is your Preferred time zone For ministry Buff?*",
-        [
-            "00:00 UTC to 02:00 UTC",
-            "02:00 UTC to 04:00 UTC",
-            "04:00 UTC to 06:00 UTC",
-            "06:00 UTC to 08:00 UTC",
-            "08:00 UTC to 10:00 UTC",
-            "10:00 UTC to 12:00 UTC",
-            "12:00 UTC to 14:00 UTC",
-            "14:00 UTC to 16:00 UTC",
-            "16:00 UTC to 18:00 UTC",
-            "18:00 UTC to 20:00 UTC",
-            "20:00 UTC to 22:00 UTC",
-            "22:00 UTC to 23:59 UTC"
-        ],
+        time_slots,
         index=0
+    )
+    
+    # Preferred alternative timings (multiple selection)
+    alt_buff_timings = st.multiselect(
+        "What are your Alternative preferred timings? (Select all that apply)",
+        time_slots,
+        default=[time_slots[1]]  # Default to second option
     )
     
     # Submit Button
@@ -119,6 +128,10 @@ with st.form("registration_form"):
         else:
             # Prepare the data row
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
+            # Convert list of alternative timings to a string for storage
+            alt_timings_str = ", ".join(alt_buff_timings) if alt_buff_timings else "None"
+            
             new_row = [
                 timestamp,
                 player_name,
@@ -129,7 +142,8 @@ with st.form("registration_form"):
                 building_speedups,
                 fc_count,
                 refined_fc_count,
-                buff_timing
+                buff_timing,
+                alt_timings_str  # Add alternative timings to the data
             ]
             
             try:
